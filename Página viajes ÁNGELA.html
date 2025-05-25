@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explora el Mundo - Viajes</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d6eaf8;
+        }
+        header {
+            background: url('https://img.freepik.com/foto-gratis/vista-3d-sol-cielo-avion_23-2150953581.jpg?semt=ais_hybrid&w=740') no-repeat center center;
+            background-size: 100% 100%;
+            color: white;
+            padding: 575px 380px;
+            text-align: center;
+			filter: contrast(110%) brightness(105%);
+        }
+		header h1 {
+			font-size: 68px;
+			margin-bottom: 10px;
+		}
+
+		header p {
+			font-size: 34px;
+		}
+		h2 {
+		margin-top: 70px;
+		}
+        nav {
+            background: #023e8a;
+            padding: 20px;
+            text-align: center;
+			font-size: 20px;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        .imagen-centro {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0 40px 0;
+			margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #023e8a;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #023e8a;
+			color: white;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 60px auto;
+        }
+        #mapa {
+            height: 400px;
+            margin: 40px 0;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Explora el Mundo</h1>
+        <p>Tu guía para destinos turísticos inolvidables</p>
+    </header>
+
+    <nav>
+        <a href="#destinos">Destinos</a>
+        <a href="#precios">Precios</a>
+        <a href="#recomendaciones">Recomendaciones</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <main>
+        <section id="destinos">
+            <h2>Puntos de Interés Turístico</h2>
+            <p>Desde las playas del Caribe hasta las montañas del Himalaya, hay un destino perfecto para cada viajero.</p>
+            <div class="imagen-centro">
+                <img src="https://www.cusco-live.com/images/cusco-live/slideshow/inicio-cusco/02-cusco-machupicchu.jpg" alt="Imagen de destino turístico">
+            </div>
+        </section>
+
+        <section id="precios">
+            <h2>Precios Estimados</h2>
+            <table>
+                <tr>
+                    <th>Destino</th>
+                    <th>Precio Estimado</th>
+                    <th>Duración</th>
+                </tr>
+                <tr>
+                    <td>París, Francia</td>
+                    <td>900€</td>
+                    <td>7 días</td>
+                </tr>
+                <tr>
+                    <td>Tokio, Japón</td>
+                    <td>2500€</td>
+                    <td>15 días</td>
+                </tr>
+                <tr>
+                    <td>Lima, Perú</td>
+                    <td>1300€</td>
+                    <td>6 días</td>
+                </tr>
+				<tr>
+                    <td>Nueva York, EEUU</td>
+                    <td>1400€</td>
+                    <td>7 días</td>
+                </tr>
+            </table>
+			<p>*Precios estimados por persona, depende del punto de partida y la época del año</p>
+        </section>
+
+        <section id="Consejos de viaje">
+            <h2>Consejos de viaje</h2>
+            <ul>
+                <li>Reserva con anticipación para obtener mejores precios (mínimo un mes antes del viaje).</li>
+                <li>Consulta los requisitos de visado del país de destino, así como los festivos nacionales. ¡Aprovecha tu tiempo al máximo!.</li>
+                <li>Compara los precios del uso del transporte público frente a un alojamiento en el centro, toma la decisión que más se adapte a tu presupuesto.</li>
+				<li>Páginas web que recomendamos: <a href="https://www.airbnb.es/" target="_blank">Airbnb</a> o <a href="https://www.booking.com/" target="_blank">Booking</a> para el alojamiento.  <a href="https://www.omio.es/" target="_blank">Omio</a>,<a href="https://www.skyscanner.es/" target="_blank">Skyscanner</a> o <a href="https://www.rome2rio.com/" target="_blank">Rometorio</a> para organizar los desplazamientos y llegadas al destino.</li>
+            </ul>
+        </section>
+
+        <section id="mapa">
+            <h2>Mapa Interactivo</h2>
+            <div id="mapa"></div>
+        </section>
+
+        <section id="contacto">
+            <h2>Formulario de Contacto</h2>
+                <p>¿Quieres una planificación personalizada y funcional sin preocupaciones? Déjalo en nuestras manos</p>
+                <p>Contacta con nosotros</p>
+        </section>
+
+            <form onsubmit="return enviarFormulario();">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                <label for="email">Correo electrónico:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="mensaje">Mensaje:</label><br>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea><br><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Explora el Mundo - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function enviarFormulario() {
+            alert("Gracias por contactarnos. Te responderemos pronto.");
+            return false;
+        }
+
+        var mapa = L.map('mapa').setView([48.8566, 2.3522], 2); // París por defecto
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapa);
+
+        // Marcadores ejemplo
+        L.marker([48.8566, 2.3522]).addTo(mapa).bindPopup('París, Francia');
+        L.marker([35.6895, 139.6917]).addTo(mapa).bindPopup('Tokio, Japón');
+        L.marker([﻿-12.06, -77.0375]).addTo(mapa).bindPopup('Lima, Perú');
+		L.marker([40.712777777778, -74.006111111111]).addTo(mapa).bindPopup('Nueva York, EEUU');
+    </script>
+</body>
+</html>
